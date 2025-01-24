@@ -8,9 +8,19 @@
     <link rel="shortcut icon" href="Images/favicon.png" type="image/png" />
     <title>Rock, Paper, Scissors, Knife</title>
     <style>
+      @font-face {
+        font-family: "headFont";
+        src: url("fonts/fugazone-regular-webfont.woff2") format("woff2"),
+          url("fonts/fugazone-regular-webfont.woff") format("woff");
+      }
+      @font-face {
+        font-family: "bodyFont";
+        src: url("fonts/righteous-regular-webfont.woff2") format("woff2"),
+          url("fonts/righteous-regular-webfont.woff") format("woff");
+      }
       .icon {
         width: 40px;
-        background-color: black;
+        /* background-color: black; */
       }
       body {
         font-size: 62.5%;
@@ -21,6 +31,8 @@
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+        font-family: "bodyFont", sans-serif;
+        text-align: center;
       }
       footer {
         font-size: 1.25rem;
@@ -28,12 +40,82 @@
       a {
         cursor: pointer;
       }
+      header {
+        font-family: "headFont", sans-serif;
+        text-decoration: underline;
+      }
+      #gameContainer {
+        background-color: hsla(0, 0%, 0%, 0.95);
+        padding: 1px;
+        border: 3px solid hsl(204, 100%, 50%);
+        border-radius: 0.8rem;
+      }
+      footer {
+        background-color: hsla(0, 78%, 29%, 0.95);
+        padding: 2px;
+        border: 5px solid hsl(0, 0%, 0%);
+        border-radius: 1.5rem;
+      }
+      h1 {
+        padding: 0;
+        margin: 0;
+        margin-bottom: 0.9rem;
+      }
+      button {
+        font-size: 1.65rem;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-family: "bodyFont", sans-serif;
+        background-color: greenyellow;
+        border: none;
+        border-radius: 0.5rem;
+      }
+      button:hover {
+        background-color: lightgreen;
+        cursor: pointer;
+      }
+      summary:hover {
+        cursor: pointer;
+        color: bisque;
+      }
     </style>
   </head>
   <body>
     <script src="script.js" defer></script>
-    <header><h1></h1></header>
-    <main></main>
+    <div id="gameContainer">
+      <header><h1>Rock, Paper, Scissors, Knife</h1></header>
+      <main>
+        <details>
+          <summary>Game Rules</summary>
+          <p>
+            Welcome to Rock, Paper, Scissors, Knife. This is a modification of
+            the classic game rock, paper, scissors. Let me explain the rules.
+          </p>
+          <p>
+            The game is just like Rock, Paper, Scissors, but the twist is that
+            there is a knife. You need to assign a goal with the minimum being
+            3. When you are very low on points and feel like you need to win the
+            game, you can use the knife.
+          </p>
+          <p>
+            When you use the knife, the opponent needs to guess of a number that
+            you are think of between 1 and 2. If the opponent guesses wrong,
+            they are killed and you win. But, if they guess the number
+            correctly, they are not killed and the game continues.
+          </p>
+          <p>
+            <b
+              >Note: The knife can only be used when you need it most, it will
+              not help you early on in the game and will only appear when you
+              and your opponent start to gain points to reach the desired
+              goal.</b
+            >
+          </p>
+          <p>Good luck and have fun!</p>
+        </details>
+        <button id="playGameButton">Play</button>
+      </main>
+    </div>
     <hr />
     <footer>
       <center>
