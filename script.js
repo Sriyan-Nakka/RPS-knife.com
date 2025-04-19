@@ -1,8 +1,14 @@
 let turnNumber;
 
+// button functions:
+
 document.querySelector("#playGameButton").onclick = function () {
   document.querySelector("#playGameButton").style.display = "none";
   document.querySelector("#gameContainer").style.display = "block";
+  document.querySelector("#paper").style.display = "inline-block";
+  document.querySelector("#scissors").style.display = "inline-block";
+  document.querySelector("#knife").style.display = "inline-block";
+  document.querySelector("#rock").style.display = "inline-block";
 };
 
 document.querySelector("#restartGameButton").onclick = function () {
@@ -10,15 +16,35 @@ document.querySelector("#restartGameButton").onclick = function () {
   document.querySelector("#playGameButton").style.display = "block";
 };
 
+// rock paper scissors and knife functions:
+
 document.querySelector("#rock").onclick = function () {
-  console.log("rock clicked");
+  document.querySelector("#paper").style.display = "none";
+  document.querySelector("#scissors").style.display = "none";
+  document.querySelector("#knife").style.display = "none";
 };
 document.querySelector("#paper").onclick = function () {
-  console.log("paper clicked");
+  document.querySelector("#rock").style.display = "none";
+  document.querySelector("#scissors").style.display = "none";
+  document.querySelector("#knife").style.display = "none";
 };
 document.querySelector("#scissors").onclick = function () {
-  console.log("scissors clicked");
+  document.querySelector("#rock").style.display = "none";
+  document.querySelector("#paper").style.display = "none";
+  document.querySelector("#knife").style.display = "none";
 };
 document.querySelector("#knife").onclick = function () {
-  console.log("knife clicked");
+  document.querySelector("#rock").style.display = "none";
+  document.querySelector("#paper").style.display = "none";
+  document.querySelector("#knife").style.display = "none";
 };
+
+//turn functions(in progress):
+
+// function botTurn() {
+//   let botChoice = document.createElement("img");
+//   botChoice.setAttribute("src", "images/knife.svg");
+//   botChoice.setAttribute("alt", "bot choice");
+//   document.querySelector("#gameContainer").appendChild(botChoice);
+// }
+// botTurn();
