@@ -6,6 +6,22 @@ let yourDecision;
 // button functions:
 
 document.querySelector("#playGameButton").onclick = function () {
+  let goalNum;
+
+  while (true) {
+    goalNum = window.prompt(
+      "Enter the goal number. The minimum value is 3. The knife will be usable if the goal is above 5."
+    );
+
+    if (goalNum !== null && goalNum !== "" && goalNum >= 3 && goalNum <= 25) {
+      alert("The goal is " + goalNum + ". Good Luck!");
+      console.log("The goal is " + goalNum);
+      break;
+    } else {
+      alert("Invalid input. Please enter a number between 3 and 25.");
+    }
+  }
+
   document.querySelector("#playGameButton").style.display = "none";
   document.querySelector("#gameContainer").style.display = "block";
   document.querySelector("#paper").style.display = "inline-block";
@@ -28,7 +44,7 @@ document.querySelector("#restartGameButton").onclick = function () {
   document.querySelector("#playGameButton").style.display = "block";
 };
 
-// rock paper scissors and knife functions:
+// player turn functions:
 
 document.querySelector("#rock").onclick = function () {
   document.querySelector("#paper").style.display = "none";
