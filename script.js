@@ -2,11 +2,20 @@ let turnNumber;
 let botDecision;
 let botDecisionImage;
 let yourDecision;
+let yourScore = 0;
+let botScore = 0;
 
-// button functions:
+// control button functions:
 
 document.querySelector("#playGameButton").onclick = function () {
   let goalNum;
+  botScore = 0;
+  yourScore = 0;
+
+  document.querySelector("#yourScore").textContent = yourScore;
+  document.querySelector("#botScore").textContent = botScore;
+
+  document.querySelector("#roundResults").textContent = "";
 
   while (true) {
     goalNum = window.prompt(
@@ -24,10 +33,8 @@ document.querySelector("#playGameButton").onclick = function () {
 
   document.querySelector("#playGameButton").style.display = "none";
   document.querySelector("#gameContainer").style.display = "block";
-  document.querySelector("#paper").style.display = "inline-block";
-  document.querySelector("#scissors").style.display = "inline-block";
+  document.querySelector("#images").style.display = "block";
   document.querySelector("#knife").style.display = "none";
-  document.querySelector("#rock").style.display = "inline-block";
   document.querySelector("#pickYourChoiceText").style.display = "inline-block";
 
   let existingYourDecisionImage = document.querySelector(
@@ -41,16 +48,30 @@ document.querySelector("#playGameButton").onclick = function () {
 document.querySelector("#restartGameButton").onclick = function () {
   document.querySelector("#gameContainer").style.display = "none";
   document.querySelector("#results").style.display = "none";
+  document.querySelector("#continueButton").style.display = "none";
   document.querySelector("#playGameButton").style.display = "block";
+};
+
+document.querySelector("#continueButton").onclick = function () {
+  let existingYourDecisionImage = document.querySelector(
+    "#yourDecisionImage img"
+  );
+  if (existingYourDecisionImage) {
+    existingYourDecisionImage.remove();
+  }
+
+  document.querySelector("#continueButton").style.display = "none";
+  document.querySelector("#results").style.display = "none";
+  document.querySelector("#pickYourChoiceText").style.display = "block";
+  document.querySelector("#roundResults").textContent = "";
+  document.querySelector("#images").style.display = "block";
 };
 
 // player turn functions:
 
 document.querySelector("#rock").onclick = function () {
-  document.querySelector("#paper").style.display = "none";
-  document.querySelector("#scissors").style.display = "none";
-  document.querySelector("#knife").style.display = "none";
-  document.querySelector("#rock").style.display = "none";
+  document.querySelector("#images").style.display = "none";
+  document.querySelector("#continueButton").style.display = "inline-block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -61,14 +82,12 @@ document.querySelector("#rock").onclick = function () {
   yourDecisionImage.setAttribute("alt", "your choice");
   yourDecisionImage.style.border = "none";
   document.querySelector("#yourDecisionImage").appendChild(yourDecisionImage);
-  botTurn();
+  botTurn("rock");
 };
 
 document.querySelector("#paper").onclick = function () {
-  document.querySelector("#rock").style.display = "none";
-  document.querySelector("#scissors").style.display = "none";
-  document.querySelector("#knife").style.display = "none";
-  document.querySelector("#paper").style.display = "none";
+  document.querySelector("#images").style.display = "none";
+  document.querySelector("#continueButton").style.display = "inline-block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -79,14 +98,12 @@ document.querySelector("#paper").onclick = function () {
   yourDecisionImage.setAttribute("alt", "your choice");
   yourDecisionImage.style.border = "none";
   document.querySelector("#yourDecisionImage").appendChild(yourDecisionImage);
-  botTurn();
+  botTurn("paper");
 };
 
 document.querySelector("#scissors").onclick = function () {
-  document.querySelector("#rock").style.display = "none";
-  document.querySelector("#paper").style.display = "none";
-  document.querySelector("#knife").style.display = "none";
-  document.querySelector("#scissors").style.display = "none";
+  document.querySelector("#images").style.display = "none";
+  document.querySelector("#continueButton").style.display = "inline-block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -97,14 +114,12 @@ document.querySelector("#scissors").onclick = function () {
   yourDecisionImage.setAttribute("alt", "your choice");
   yourDecisionImage.style.border = "none";
   document.querySelector("#yourDecisionImage").appendChild(yourDecisionImage);
-  botTurn();
+  botTurn("scissors");
 };
 
 document.querySelector("#knife").onclick = function () {
-  document.querySelector("#rock").style.display = "none";
-  document.querySelector("#paper").style.display = "none";
-  document.querySelector("#scissors").style.display = "none";
-  document.querySelector("#knife").style.display = "none";
+  document.querySelector("#images").style.display = "none";
+  document.querySelector("#continueButton").style.display = "inline-block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -115,10 +130,10 @@ document.querySelector("#knife").onclick = function () {
   yourDecisionImage.setAttribute("alt", "your choice");
   yourDecisionImage.style.border = "none";
   document.querySelector("#yourDecisionImage").appendChild(yourDecisionImage);
-  botTurn();
+  // botTurn();
 };
 
-function botTurn() {
+function botTurn(playerChoice) {
   let existingBotDecisionImage = document.querySelector(
     "#botDecisionImage img"
   );
@@ -126,9 +141,10 @@ function botTurn() {
     existingBotDecisionImage.remove();
   }
 
-  // Generate a new bot choice
-  let botChoice = Math.floor(Math.random() * 3) + 1;
-  switch (botChoice) {
+  let botChoice;
+
+  let botDecision = Math.floor(Math.random() * 3) + 1;
+  switch (botDecision) {
     case 1:
       document.querySelector("#botChoseSpan").textContent = "Rock";
 
@@ -137,6 +153,7 @@ function botTurn() {
       botDecisionImage.setAttribute("alt", "bot choice");
       botDecisionImage.style.border = "none";
       document.querySelector("#botDecisionImage").appendChild(botDecisionImage);
+      botChoice = "rock";
       break;
     case 2:
       document.querySelector("#botChoseSpan").textContent = "Paper";
@@ -146,6 +163,7 @@ function botTurn() {
       botDecisionImage.setAttribute("alt", "bot choice");
       botDecisionImage.style.border = "none";
       document.querySelector("#botDecisionImage").appendChild(botDecisionImage);
+      botChoice = "paper";
       break;
     case 3:
       document.querySelector("#botChoseSpan").textContent = "Scissors";
@@ -155,6 +173,73 @@ function botTurn() {
       botDecisionImage.setAttribute("alt", "bot choice");
       botDecisionImage.style.border = "none";
       document.querySelector("#botDecisionImage").appendChild(botDecisionImage);
+      botChoice = "scissors";
+      break;
+  }
+
+  switch (playerChoice) {
+    case "rock":
+      switch (botChoice) {
+        case "rock":
+          document.querySelector("#roundResults").textContent =
+            "It's a tie! No one gets a point.";
+          break;
+        case "paper":
+          document.querySelector("#roundResults").textContent =
+            "The Bot won, it gets a point!";
+          botScore++;
+          document.querySelector("#botScore").textContent = botScore;
+          break;
+        case "scissors":
+          document.querySelector("#roundResults").textContent =
+            "You won, you get a point!";
+          yourScore++;
+          document.querySelector("#yourScore").textContent = yourScore;
+          break;
+      }
+      break;
+    case "paper":
+      switch (botChoice) {
+        case "rock":
+          document.querySelector("#roundResults").textContent =
+            "You won, you get a point!";
+          yourScore++;
+          document.querySelector("#yourScore").textContent = yourScore;
+          break;
+        case "paper":
+          document.querySelector("#roundResults").textContent =
+            "It's a tie! No one gets a point.";
+          break;
+        case "scissors":
+          document.querySelector("#roundResults").textContent =
+            "The Bot won, it gets a point!";
+          botScore++;
+          document.querySelector("#botScore").textContent = botScore;
+          break;
+      }
+      break;
+    case "scissors":
+      switch (botChoice) {
+        case "rock":
+          document.querySelector("#roundResults").textContent =
+            "The Bot won, it gets a point!";
+          botScore++;
+          document.querySelector("#botScore").textContent = botScore;
+          break;
+        case "paper":
+          document.querySelector("#roundResults").textContent =
+            "You won, you get a point!";
+          yourScore++;
+          document.querySelector("#yourScore").textContent = yourScore;
+          break;
+        case "scissors":
+          document.querySelector("#roundResults").textContent =
+            "It's a tie! No one gets a point.";
+          break;
+      }
+      break;
+    case "knife":
+      //in progress...
       break;
   }
 }
