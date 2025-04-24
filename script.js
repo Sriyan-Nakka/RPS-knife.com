@@ -4,11 +4,11 @@ let botDecisionImage;
 let yourDecision;
 let yourScore = 0;
 let botScore = 0;
+let goalNum;
 
 // control button functions:
 
 document.querySelector("#playGameButton").onclick = function () {
-  let goalNum;
   botScore = 0;
   yourScore = 0;
 
@@ -18,8 +18,10 @@ document.querySelector("#playGameButton").onclick = function () {
   document.querySelector("#roundResults").textContent = "";
 
   while (true) {
-    goalNum = window.prompt(
-      "Enter the goal number. The minimum value is 3. The knife will be usable if the goal is above 5."
+    goalNum = Number(
+      window.prompt(
+        "Enter the goal number. The minimum value is 3. The knife will be usable if the goal is above 5."
+      )
     );
 
     if (goalNum !== null && goalNum !== "" && goalNum >= 3 && goalNum <= 25) {
@@ -48,7 +50,7 @@ document.querySelector("#playGameButton").onclick = function () {
 document.querySelector("#restartGameButton").onclick = function () {
   document.querySelector("#gameContainer").style.display = "none";
   document.querySelector("#results").style.display = "none";
-  document.querySelector("#continueButton").style.display = "none";
+  document.querySelector("#continueButtonSpan").style.display = "none";
   document.querySelector("#playGameButton").style.display = "block";
 };
 
@@ -60,7 +62,7 @@ document.querySelector("#continueButton").onclick = function () {
     existingYourDecisionImage.remove();
   }
 
-  document.querySelector("#continueButton").style.display = "none";
+  document.querySelector("#continueButtonSpan").style.display = "none";
   document.querySelector("#results").style.display = "none";
   document.querySelector("#pickYourChoiceText").style.display = "block";
   document.querySelector("#roundResults").textContent = "";
@@ -71,7 +73,7 @@ document.querySelector("#continueButton").onclick = function () {
 
 document.querySelector("#rock").onclick = function () {
   document.querySelector("#images").style.display = "none";
-  document.querySelector("#continueButton").style.display = "inline-block";
+  document.querySelector("#continueButtonSpan").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -87,7 +89,7 @@ document.querySelector("#rock").onclick = function () {
 
 document.querySelector("#paper").onclick = function () {
   document.querySelector("#images").style.display = "none";
-  document.querySelector("#continueButton").style.display = "inline-block";
+  document.querySelector("#continueButtonSpan").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -103,7 +105,7 @@ document.querySelector("#paper").onclick = function () {
 
 document.querySelector("#scissors").onclick = function () {
   document.querySelector("#images").style.display = "none";
-  document.querySelector("#continueButton").style.display = "inline-block";
+  document.querySelector("#continueButtonSpan").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -119,7 +121,7 @@ document.querySelector("#scissors").onclick = function () {
 
 document.querySelector("#knife").onclick = function () {
   document.querySelector("#images").style.display = "none";
-  document.querySelector("#continueButton").style.display = "inline-block";
+  document.querySelector("#continueButton").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -184,20 +186,49 @@ function botTurn(playerChoice) {
           document.querySelector("#roundResults").textContent =
             "It's a tie! No one gets a point.";
           break;
+
         case "paper":
           document.querySelector("#roundResults").textContent =
             "The Bot won, it gets a point!";
           botScore++;
           document.querySelector("#botScore").textContent = botScore;
+          if (botScore === goalNum) {
+            document.querySelector("#continueButtonSpan").style.display =
+              "none";
+            document.querySelector("#restartGameButton").style.display = "none";
+            setTimeout(() => {
+              alert(
+                `The bot reached ${goalNum} before you. Click the play button to play again!`
+              );
+              document.querySelector("#gameContainer").style.display = "none";
+              document.querySelector("#results").style.display = "none";
+              document.querySelector("#playGameButton").style.display = "block";
+            }, 2000);
+          }
           break;
+
         case "scissors":
           document.querySelector("#roundResults").textContent =
             "You won, you get a point!";
           yourScore++;
           document.querySelector("#yourScore").textContent = yourScore;
+          if (yourScore === goalNum) {
+            document.querySelector("#continueButtonSpan").style.display =
+              "none";
+            document.querySelector("#restartGameButton").style.display = "none";
+            setTimeout(() => {
+              alert(
+                `Congratulations, you have reached the goal! Click the play button to play again!`
+              );
+              document.querySelector("#gameContainer").style.display = "none";
+              document.querySelector("#results").style.display = "none";
+              document.querySelector("#playGameButton").style.display = "block";
+            }, 2000);
+          }
           break;
       }
       break;
+
     case "paper":
       switch (botChoice) {
         case "rock":
@@ -205,19 +236,48 @@ function botTurn(playerChoice) {
             "You won, you get a point!";
           yourScore++;
           document.querySelector("#yourScore").textContent = yourScore;
+          if (yourScore === goalNum) {
+            document.querySelector("#continueButtonSpan").style.display =
+              "none";
+            document.querySelector("#restartGameButton").style.display = "none";
+            setTimeout(() => {
+              alert(
+                `Congratulations, you have reached the goal! Click the play button to play again!`
+              );
+              document.querySelector("#gameContainer").style.display = "none";
+              document.querySelector("#results").style.display = "none";
+              document.querySelector("#playGameButton").style.display = "block";
+            }, 2000);
+          }
           break;
+
         case "paper":
           document.querySelector("#roundResults").textContent =
             "It's a tie! No one gets a point.";
           break;
+
         case "scissors":
           document.querySelector("#roundResults").textContent =
             "The Bot won, it gets a point!";
           botScore++;
           document.querySelector("#botScore").textContent = botScore;
+          if (botScore === goalNum) {
+            document.querySelector("#continueButtonSpan").style.display =
+              "none";
+            document.querySelector("#restartGameButton").style.display = "none";
+            setTimeout(() => {
+              alert(
+                `The bot reached ${goalNum} before you. Click the play button to play again!`
+              );
+              document.querySelector("#gameContainer").style.display = "none";
+              document.querySelector("#results").style.display = "none";
+              document.querySelector("#playGameButton").style.display = "block";
+            }, 2000);
+          }
           break;
       }
       break;
+
     case "scissors":
       switch (botChoice) {
         case "rock":
@@ -225,19 +285,49 @@ function botTurn(playerChoice) {
             "The Bot won, it gets a point!";
           botScore++;
           document.querySelector("#botScore").textContent = botScore;
+          if (botScore === goalNum) {
+            document.querySelector("#continueButtonSpan").style.display =
+              "none";
+            document.querySelector("#restartGameButton").style.display = "none";
+            setTimeout(() => {
+              alert(
+                `The bot reached ${goalNum} before you. Click the play button to play again!`
+              );
+              document.querySelector("#gameContainer").style.display = "none";
+              document.querySelector("#results").style.display = "none";
+              document.querySelector("#playGameButton").style.display = "block";
+            }, 2000);
+          }
           break;
+
         case "paper":
           document.querySelector("#roundResults").textContent =
             "You won, you get a point!";
           yourScore++;
           document.querySelector("#yourScore").textContent = yourScore;
+          if (yourScore === goalNum) {
+            document.querySelector("#continueButtonSpan").style.display =
+              "none";
+            document.querySelector("#restartGameButton").style.display = "none";
+            setTimeout(() => {
+              alert(
+                `Congratulations, you have reached the goal! Click the play button to play again!`
+              );
+              document.querySelector("#gameContainer").style.display = "none";
+              document.querySelector("#results").style.display = "none";
+              document.querySelector("#playGameButton").style.display = "block";
+            }, 2000);
+          }
+
           break;
+
         case "scissors":
           document.querySelector("#roundResults").textContent =
             "It's a tie! No one gets a point.";
           break;
       }
       break;
+
     case "knife":
       //in progress...
       break;
