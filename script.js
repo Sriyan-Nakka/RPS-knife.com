@@ -5,6 +5,7 @@ let yourDecision;
 let yourScore = 0;
 let botScore = 0;
 let goalNum;
+let knifeSummonNumber;
 
 // control button functions:
 
@@ -27,6 +28,10 @@ document.querySelector("#playGameButton").onclick = function () {
     if (goalNum !== null && goalNum !== "" && goalNum >= 3 && goalNum <= 25) {
       alert("The goal is " + goalNum + ". Good Luck!");
       console.log("The goal is " + goalNum);
+      if (goalNum > 5) {
+        knifeSummonNumber = Math.floor((75 / 100) * goalNum);
+        console.log("The knife summon number is " + knifeSummonNumber);
+      }
       break;
     } else {
       alert("Invalid input. Please enter a number between 3 and 25.");
@@ -67,6 +72,11 @@ document.querySelector("#continueButton").onclick = function () {
   document.querySelector("#pickYourChoiceText").style.display = "block";
   document.querySelector("#roundResults").textContent = "";
   document.querySelector("#images").style.display = "block";
+
+  if (goalNum > 5 && botScore === knifeSummonNumber) {
+    document.querySelector("#knife").style.display = "inline-block";
+    alert("You have unlocked the knife! You can use it now. Be wise..");
+  }
 };
 
 // player turn functions:
@@ -121,7 +131,7 @@ document.querySelector("#scissors").onclick = function () {
 
 document.querySelector("#knife").onclick = function () {
   document.querySelector("#images").style.display = "none";
-  document.querySelector("#continueButton").style.display = "block";
+  document.querySelector("#continueButtonSpan").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -132,7 +142,14 @@ document.querySelector("#knife").onclick = function () {
   yourDecisionImage.setAttribute("alt", "your choice");
   yourDecisionImage.style.border = "none";
   document.querySelector("#yourDecisionImage").appendChild(yourDecisionImage);
-  // botTurn();
+
+  document.querySelector("#botChoseSpan").textContent = "";
+  let existingBotDecisionImage = document.querySelector(
+    "#botDecisionImage img"
+  );
+  if (existingBotDecisionImage) {
+    existingBotDecisionImage.remove();
+  }
 };
 
 function botTurn(playerChoice) {
@@ -329,7 +346,27 @@ function botTurn(playerChoice) {
       break;
 
     case "knife":
-      //in progress...
+      let guessingNum;
+      while (true) {
+        guessingNum = Number(
+          window.prompt(
+            "Enter the number 1 or 2. The bot has to guess that number. If it guesses it, the game continues. If it doesn't, you win!"
+          )
+        );
+
+        if (
+          guessingNum !== null &&
+          guessingNum !== "" &&
+          guessingNum >= 1 &&
+          guessingNum <= 2
+        ) {
+          let botGuess = Math.floor(Math.random() * 2) + 1;
+          if (botGuess === guessingNum) {
+          } else {
+          }
+          break;
+        }
+      }
       break;
   }
 }
