@@ -150,6 +150,33 @@ document.querySelector("#knife").onclick = function () {
   if (existingBotDecisionImage) {
     existingBotDecisionImage.remove();
   }
+
+  let guessingNum;
+  while (true) {
+    guessingNum = Number(
+      window.prompt(
+        "Enter the number 1 or 2. The bot has to guess that number. If it guesses it, the game continues. If it doesn't, you win!"
+      )
+    );
+
+    if (
+      guessingNum !== null &&
+      guessingNum !== "" &&
+      guessingNum >= 1 &&
+      guessingNum <= 2
+    ) {
+      let botGuess = Math.floor(Math.random() * 2) + 1;
+      //bot guessed number print code
+      if (botGuess === guessingNum) {
+        //bot guessed number so game continue button appears
+      } else {
+        //bot killed give you win alert code and revert everything to normal for next game
+      }
+      break;
+    } else {
+      alert("Invalid number. Please enter a number between 1 and 2.");
+    }
+  }
 };
 
 function botTurn(playerChoice) {
@@ -342,30 +369,6 @@ function botTurn(playerChoice) {
           document.querySelector("#roundResults").textContent =
             "It's a tie! No one gets a point.";
           break;
-      }
-      break;
-
-    case "knife":
-      let guessingNum;
-      while (true) {
-        guessingNum = Number(
-          window.prompt(
-            "Enter the number 1 or 2. The bot has to guess that number. If it guesses it, the game continues. If it doesn't, you win!"
-          )
-        );
-
-        if (
-          guessingNum !== null &&
-          guessingNum !== "" &&
-          guessingNum >= 1 &&
-          guessingNum <= 2
-        ) {
-          let botGuess = Math.floor(Math.random() * 2) + 1;
-          if (botGuess === guessingNum) {
-          } else {
-          }
-          break;
-        }
       }
       break;
   }
