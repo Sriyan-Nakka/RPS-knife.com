@@ -6,6 +6,7 @@ let yourScore = 0;
 let botScore = 0;
 let goalNum;
 let knifeSummonNumber;
+let knifeSummoned = false;
 
 // control button functions:
 
@@ -15,6 +16,9 @@ document.querySelector("#playGameButton").onclick = function () {
 
   document.querySelector("#yourScore").textContent = yourScore;
   document.querySelector("#botScore").textContent = botScore;
+
+  document.querySelector("#youChoseSpan").textContent = "";
+  document.querySelector("#botChoseSpan").textContent = "";
 
   document.querySelector("#roundResults").textContent = "";
 
@@ -73,9 +77,10 @@ document.querySelector("#continueButton").onclick = function () {
   document.querySelector("#roundResults").textContent = "";
   document.querySelector("#images").style.display = "block";
 
-  if (goalNum > 5 && botScore === knifeSummonNumber) {
+  if (goalNum > 5 && botScore === knifeSummonNumber && !knifeSummoned) {
     document.querySelector("#knife").style.display = "inline-block";
     alert("You have unlocked the knife! You can use it now. Be wise..");
+    knifeSummoned = true;
   }
 };
 
@@ -149,6 +154,7 @@ document.querySelector("#knife").onclick = function () {
     existingBotDecisionImage.remove();
   }
 
+  //number selecting:
   let guessingNum;
   while (true) {
     guessingNum = Number(
@@ -173,7 +179,21 @@ document.querySelector("#knife").onclick = function () {
       if (botGuess === guessingNum) {
         document.querySelector("#continueButtonSpan").style.display = "block";
         document.querySelector("#roundResults").textContent =
-          "The bot guessed your number! The game continues...";
+          "The bot guessed your number! It gets a point.";
+        botScore++;
+        document.querySelector("#botScore").textContent = botScore;
+        if (botScore === goalNum) {
+          document.querySelector("#continueButtonSpan").style.display = "none";
+          document.querySelector("#restartGameButton").style.display = "none";
+          setTimeout(() => {
+            alert(
+              `The bot reached ${goalNum} before you. Click the play button to play again!`
+            );
+            document.querySelector("#gameContainer").style.display = "none";
+            document.querySelector("#results").style.display = "none";
+            document.querySelector("#playGameButton").style.display = "block";
+          }, 2000);
+        }
       } else {
         document.querySelector("#roundResults").textContent =
           "The bot guessed the wrong number, You win! Click the play button to play again(at the top).";
