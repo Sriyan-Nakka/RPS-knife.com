@@ -33,6 +33,9 @@ document.querySelector("#playGameButton").onclick = function () {
   document.querySelector("#youChoseSpan").textContent = "";
   document.querySelector("#botChoseSpan").textContent = "";
 
+  document.querySelector("#youChosePara").style.display = "none";
+  document.querySelector("#botChosePara").style.display = "none";
+
   document.querySelector("#roundResults").textContent = "";
 
   while (true) {
@@ -102,6 +105,8 @@ document.querySelector("#continueButton").onclick = function () {
 document.querySelector("#rock").onclick = function () {
   document.querySelector("#images").style.display = "none";
   document.querySelector("#continueButtonSpan").style.display = "block";
+  document.querySelector("#youChosePara").style.display = "block";
+  document.querySelector("#botChosePara").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -118,6 +123,8 @@ document.querySelector("#rock").onclick = function () {
 document.querySelector("#paper").onclick = function () {
   document.querySelector("#images").style.display = "none";
   document.querySelector("#continueButtonSpan").style.display = "block";
+  document.querySelector("#youChosePara").style.display = "block";
+  document.querySelector("#botChosePara").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
@@ -134,6 +141,8 @@ document.querySelector("#paper").onclick = function () {
 document.querySelector("#scissors").onclick = function () {
   document.querySelector("#images").style.display = "none";
   document.querySelector("#continueButtonSpan").style.display = "block";
+  document.querySelector("#youChosePara").style.display = "block";
+  document.querySelector("#botChosePara").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
