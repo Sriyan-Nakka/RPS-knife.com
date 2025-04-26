@@ -26,6 +26,7 @@ let knifeSummoned = false;
 document.querySelector("#playGameButton").onclick = function () {
   botScore = 0;
   yourScore = 0;
+  knifeSummoned = false;
 
   document.querySelector("#restartGameButton").style.display = "inline-block";
 
