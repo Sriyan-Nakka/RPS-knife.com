@@ -27,6 +27,8 @@ document.querySelector("#playGameButton").onclick = function () {
   botScore = 0;
   yourScore = 0;
 
+  document.querySelector("#restartGameButton").style.display = "block";
+
   document.querySelector("#yourScore").textContent = yourScore;
   document.querySelector("#botScore").textContent = botScore;
 
