@@ -1,0 +1,32 @@
+{
+  "name": "Rock, Paper, Scissors and Knife",
+  "short_name": "RPS Knife",
+  "description": "Rock Paper Scissors but with a twist...",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#7D3DF5",
+  "theme_color": "#00E0FF",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "favicons/192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "favicons/512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "favicons/24x24.png",
+      "type": "image/png",
+      "sizes": "24x24"
+    },
+    {
+      "src": "favicons/32x32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    }
+  ]
+}
