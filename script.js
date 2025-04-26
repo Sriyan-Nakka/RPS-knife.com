@@ -131,11 +131,9 @@ document.querySelector("#scissors").onclick = function () {
 
 document.querySelector("#knife").onclick = function () {
   document.querySelector("#images").style.display = "none";
-  document.querySelector("#continueButtonSpan").style.display = "block";
 
   document.querySelector("#pickYourChoiceText").style.display = "none";
   document.querySelector("#results").style.display = "inline-block";
-  document.querySelector("#youChoseSpan").textContent = "Knife";
 
   let yourDecisionImage = document.createElement("img");
   yourDecisionImage.setAttribute("src", "Images/knife.svg");
@@ -166,11 +164,22 @@ document.querySelector("#knife").onclick = function () {
       guessingNum <= 2
     ) {
       let botGuess = Math.floor(Math.random() * 2) + 1;
-      //bot guessed number print code
+      document.querySelector(
+        "#youChoseSpan"
+      ).textContent = `Knife, you also chose the number ${guessingNum} for the bot to guess.`;
+      document.querySelector(
+        "#botChoseSpan"
+      ).textContent = `the number ${botGuess}`;
       if (botGuess === guessingNum) {
-        //bot guessed number so game continue button appears
+        document.querySelector("#continueButtonSpan").style.display = "block";
+        document.querySelector("#roundResults").textContent =
+          "The bot guessed your number! The game continues...";
       } else {
-        //bot killed give you win alert code and revert everything to normal for next game
+        document.querySelector("#roundResults").textContent =
+          "The bot guessed the wrong number, You win! Click the play button to play again(at the top).";
+        document.querySelector("#continueButtonSpan").style.display = "none";
+        document.querySelector("#restartGameButton").style.display = "none";
+        document.querySelector("#playGameButton").style.display = "block";
       }
       break;
     } else {
